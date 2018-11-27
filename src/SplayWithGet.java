@@ -170,44 +170,34 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     }
 
     private void splay(Entry e){
-        if( e.parent != null){
-            if( e.parent.parent != null ){
-                if( e.parent == e.parent.parent.left){ //ends with zig
-                    if(e == e.parent.left){ //zigzig
-                        zigzig(e.parent.parent);
-                        System.out.println("zigzig");
-                    }else{ //zagzig
-                        zagzig(e.parent.parent);
-                        System.out.println("zagzig1");
-                    }
-                }else { //ends with zag
-                    if(e == e.parent.left){ //zigzag
-                        zigzag(e.parent.parent);
-                        System.out.println("zigzag");
+        if (e == root)
+            return;
 
-                    }else{ //zagzag
-                        zagzag(e.parent.parent);
-                        System.out.println("zagzag");
+        if (e.parent == root) {
+            if (e == root.left) {
+                zig(root);
+            } else {
+                zag(root);
+            }
+            return;
+        }
 
-                    }
-                }
-                if( e.parent != null && e.parent.parent != null){
-                    splay(e.parent.parent);
-                }
-
-            }else{
-                if(e == e.parent.left){ //zig
-                    zig(e.parent);
-
-                }else{ //zag
-                    zag(e.parent);
-
-                }
-                if(e.parent != null){
-                    splay(e.parent);
-                }
+        Entry parent = e.parent;
+        Entry grandparent = parent.parent;
+        if (parent == grandparent.left) {
+            if (e == parent.left) {
+                zigzig(grandparent);
+            } else {
+                zagzig(grandparent);
+            }
+        } else {
+            if (e == parent.left) {
+                zigzag(grandparent);
+            } else {
+                zagzag(grandparent);
             }
         }
+        splay(grandparent);
     }
 
     @Override
@@ -216,8 +206,8 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
 
         if( entry != null ){
             splay(entry);
+            return root.element;
         }
-
-        return entry == null ? null : entry.element;
+        return null;
     }
 }
