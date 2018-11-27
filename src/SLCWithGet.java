@@ -1,19 +1,14 @@
 public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollection<E> implements CollectionWithGet<E> {
 
-
-    public SLCWithGet() {
-        super();
-    }
-
     /**
-     *  Adds Element e to the list
-     * @param e element to be added to the list
-     * @return returns true if add was successfull(will always return true)
+     * Adds an element to the list sorted by the elements natural ordering.
+     * @param e the object to add into the list
+     * @return true if the object has been added to the list
      */
     @Override
     public boolean add( E e ){
 
-        if( head == null || (e.compareTo(head.element) < 0) ){
+        if(e == null || isEmpty() || (e.compareTo(head.element) < 0) ){
             return super.add(e);
         }
 
@@ -31,9 +26,15 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
     }
 
     /**
-     * Will return an element in the list that equals e
+     * Find the first occurence of an element
+     * in the list that is equal to the argument
+     * <tt>e</tt> with respect to its natural order.
+     * I.e. <tt>e.compareTo(element)</tt> is 0.
+     *
      * @param e The dummy element to compare to.
-     * @return element in list that equals e, or null if no element in list is equal to e
+     * @return  An element <tt>e'</tt> in the list
+     *          satisfying <tt>e.compareTo(e') == 0</tt>.
+     *          If no element is found, <tt>null</tt> is returned
      */
     @Override
     public E get(E e) {
