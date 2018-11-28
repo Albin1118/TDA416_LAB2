@@ -1,5 +1,7 @@
 //package datastructures;
 
+import java.util.NoSuchElementException;
+
 /**
  * The requirments to satisfy the requirements
  * of the abstract data type for stacks
