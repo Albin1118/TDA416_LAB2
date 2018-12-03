@@ -1,5 +1,47 @@
 public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 
+    @Override
+    public E get(E e) {
+        Entry entry = find(e,root);
+
+        if( entry != null ){
+            splay(entry);
+            return root.element;
+        }
+        return null;
+    }
+
+    private void splay(Entry e){
+        if (e == root)
+            return;
+
+        if (e.parent == root) {
+            if (e == root.left) {
+                zig(root);
+            } else {
+                zag(root);
+            }
+            return;
+        }
+
+        Entry parent = e.parent;
+        Entry grandparent = parent.parent;
+        if (parent == grandparent.left) {
+            if (e == parent.left) {
+                zigzig(grandparent);
+            } else {
+                zagzig(grandparent);
+            }
+        } else {
+            if (e == parent.left) {
+                zigzag(grandparent);
+            } else {
+                zagzag(grandparent);
+            }
+        }
+        splay(grandparent);
+    }
+
     // ========== ========== ========== ==========
 
     /* Rotera 1 steg i hogervarv, dvs
@@ -167,47 +209,5 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         z.parent = x;
         z.right = y;
         y.parent = z;
-    }
-
-    private void splay(Entry e){
-        if (e == root)
-            return;
-
-        if (e.parent == root) {
-            if (e == root.left) {
-                zig(root);
-            } else {
-                zag(root);
-            }
-            return;
-        }
-
-        Entry parent = e.parent;
-        Entry grandparent = parent.parent;
-        if (parent == grandparent.left) {
-            if (e == parent.left) {
-                zigzig(grandparent);
-            } else {
-                zagzig(grandparent);
-            }
-        } else {
-            if (e == parent.left) {
-                zigzag(grandparent);
-            } else {
-                zagzag(grandparent);
-            }
-        }
-        splay(grandparent);
-    }
-
-    @Override
-    public E get(E e) {
-        Entry entry = find(e,root);
-
-        if( entry != null ){
-            splay(entry);
-            return root.element;
-        }
-        return null;
     }
 }
