@@ -60,7 +60,7 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     }  //   find
 
     /**
-     * Moves the data in the specified Entry to the top of the tree.
+     * Moves the data in the specified Entry e to the top of the tree.
      *
      * If e is the root:
      *      do nothing because it is already at the top.
