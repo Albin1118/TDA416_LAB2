@@ -1,3 +1,9 @@
+/**
+ * This is a regular <tt>BinarySearchTree</tt>, but extended with the method <tt>get</tt>, and
+ * moving elements to the top when searching for them with <tt>get</tt> for faster future searches for when getting
+ * elements that are searched for often.
+ * @param <E> The comparable type of the tree's elements.
+ */
 public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 
     @Override
@@ -11,6 +17,18 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         return null;
     }
 
+    /**
+     * Moves the data in the specified Entry to the top of the tree.
+     *
+     * If e is the root:
+     *      do nothing because it is already at the top.
+     * If e is a direct child of the root:
+     *      do a zig if it is the left child otherwise do a zag.
+     * Else:
+     *      move it up two steps (with a combination of two zig/zag) and make a recursive call.
+     *
+     * @param e The Entry to splay to the top.
+     */
     private void splay(Entry e){
         if (e == root)
             return;
