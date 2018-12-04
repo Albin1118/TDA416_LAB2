@@ -46,7 +46,7 @@ public class Test_SplayWithGet {
         /////////////////////
 
         System.out.println(tree.toString());
-        tree.get(15);
+        tree.get(11);
         System.out.println(tree.toString());
 
     }

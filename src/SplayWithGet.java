@@ -8,14 +8,83 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
 
     @Override
     public E get(E e) {
-        Entry entry = find(e,root);
 
-        if( entry != null ){
+        if( root == null){
+            return null;
+        }
+
+        Entry entry = splayFind2(e,root);
+
+        if(entry.element.compareTo(e) == 0){
             splay(entry);
             return root.element;
+        }else{
+            splay(entry);
+            return null;
         }
-        return null;
+
     }
+
+    /*private Entry splayFind( E elem, Entry t ) {
+
+            int jfr = elem.compareTo( t.element );
+
+            if( jfr == 0){  //If the element is found, return the entry
+                return t;
+            }
+
+            if( t.left == null && t.right == null){ //If both children of the current node are null, stop the search and return t
+                return t;
+            }
+
+            if ( jfr  < 0 ) { //If the element is smaller than root.element, search the left subtree
+                if (t.left == null) {
+                    return t;   //If the left entry is null, return current entry.
+                }
+                return splayFind(elem, t.left); //If the left entry is not null, continue search
+            }
+            else if ( jfr > 0 ) {  //If the element is larger than root.element, search the right subtree
+                if (t.right == null) {
+                    return t;   //If the right entry is null, return current entry
+                }
+                return splayFind(elem, t.right); // If the right entry is not null, continue search
+
+            }
+            return null;
+
+    }  //   find*/
+
+    private Entry splayFind2( E elem, Entry t ) {
+        if ( t == null )
+            return null;
+        else {
+
+            if( t.left == null && t.right == null){ //If both children of the current node are null, stop the search and return t
+                return t;
+            }
+
+            int jfr = elem.compareTo( t.element );
+            if ( jfr  < 0 ) {
+                Entry found = splayFind2(elem, t.left);
+                if( found == null){
+                    return t;
+                }
+                else{
+                    return found;
+                }
+            }else if ( jfr > 0 ) {
+                Entry found = splayFind2(elem, t.right);
+                if( found == null ){
+                    return t;
+                }
+                else {
+                    return found;
+                }
+            }else {
+                return t;
+            }
+        }
+    }  //   find
 
     /**
      * Moves the data in the specified Entry to the top of the tree.
