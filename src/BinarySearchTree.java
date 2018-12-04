@@ -620,7 +620,7 @@ public class BinarySearchTree<E extends Comparable<? super E>>
 	// ========= ========= ========= ========= =========
 	// for testing
 	public static void main(String[] args) {
-		BinarySearchTree<Integer> st = new BinarySearchTree<Integer>();
+		/*BinarySearchTree<Integer> st = new BinarySearchTree<Integer>();
 		st.add(1);
 		st.add(2);
 		st.add(3);
@@ -635,23 +635,23 @@ public class BinarySearchTree<E extends Comparable<? super E>>
 			System.out.print(it.next() + " ");
 		}
 		System.out.println();
-		
-		/*
-		SplayTreeWithGet<Integer> st = new SplayTreeWithGet<Integer>();
+		*/
+
+		SplayWithGet<Integer> st = new SplayWithGet<Integer>();
 		st.add(100);
 		st.add(50);
 		st.add(150);
 		st.add(25);
-		//st.add(75);
+		st.add(75);
 
 		st.add(125);
 		st.add(175);
 		st.add(120);
 		st.add(110);
-		/*
+
 		st.add(10);
 		st.add(30);
-		/*
+
 		st.add(60);
 		st.add(80);
 		st.add(110);
@@ -666,7 +666,7 @@ public class BinarySearchTree<E extends Comparable<? super E>>
 	
 		System.out.println("Tree after get(75)");
 		System.out.println(st);
-		*/
+
 	} // end main
 	
 }  //  class BinarySearchTree
