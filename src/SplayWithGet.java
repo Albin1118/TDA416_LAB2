@@ -280,16 +280,6 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         E e = x.element;
         x.element = z.element;
         z.element = e;
-        // move A
-        z.left = x.left;
-        if( z.left != null){
-            z.left.parent = z;
-        }
-        // move B
-        z.right = y.left;
-        if( z.right != null){
-            z.right.parent = z;
-        }
         // move C
         y.right = z.left;
         if ( y.right != null ){
@@ -299,6 +289,16 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         x.right = z.right;
         if( x.right != null ){
             x.right.parent = x;
+        }
+        // move A
+        z.left = x.left;
+        if( z.left != null){
+            z.left.parent = z;
+        }
+        // move B
+        z.right = y.left;
+        if( z.right != null){
+            z.right.parent = z;
         }
         // move y
         x.left = y;
