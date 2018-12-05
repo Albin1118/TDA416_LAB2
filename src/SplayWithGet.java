@@ -26,41 +26,40 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     private boolean splayFind( E elem, Entry t ) {
         if ( t == null )
             return false;
-        else {
 
-            //if( t.left == null && t.right == null){ //If both children of the current node are null, stop the search and return t
-            //    splay(t);
-            //    return null;
-            //}
+        //if( t.left == null && t.right == null){ //If both children of the current node are null, stop the search and return t
+        //    splay(t);
+        //    return null;
+        //}
 
-            int jfr = elem.compareTo( t.element );
-            if ( jfr  < 0 ) {
-                //Entry found = splayFind(elem, t.left);
-                if( t.left == null){
-                    splay(t);
-                    return false;
-                }
-                else{
-                    return splayFind(elem, t.left);
-                }
-            }else if ( jfr > 0 ) {
-                //Entry found = splayFind(elem, t.right);
-                if( t.right == null ){
-                    splay(t);
-                    return false;
-                }
-                else {
-                    return splayFind(elem, t.right);
-                }
-            }else {
+        int jfr = elem.compareTo( t.element );
+        if ( jfr  < 0 ) {
+            //Entry found = splayFind(elem, t.left);
+            if( t.left == null){
                 splay(t);
-                return true;
+                return false;
             }
+            else{
+                return splayFind(elem, t.left);
+            }
+        }else if ( jfr > 0 ) {
+            //Entry found = splayFind(elem, t.right);
+            if( t.right == null ){
+                splay(t);
+                return false;
+            }
+            else {
+                return splayFind(elem, t.right);
+            }
+        }else {
+            splay(t);
+            return true;
         }
     }  //   find
 
     /**
-     * Moves the data in the specified Entry e to the top of the tree.
+     * Moves the data in the specified Entry e to the top of the tree
+     * (only by swapping around, not affecting what the tree contains).
      *
      * If e is the root:
      *      do nothing because it is already at the top.
