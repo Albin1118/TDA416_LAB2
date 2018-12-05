@@ -7,7 +7,7 @@
 public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 
     /**
-     *  Find the first occurence of an element
+     *  Find the first occurrence of an element
      *  in the collection that is equal to the argument
      *  <tt>e</tt> with respect to its natural order.
      *  I.e. <tt>e.compateTo(element)</tt> is 0.
@@ -264,40 +264,47 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
 
     }
 
-    /* Rotera 1 steg höger, 1 steg vänster, dvs
+    /*
                x'                 z'
               / \                / \
-             D   y'   -->       y'  A
+             A   y'   -->       y'  D
                 / \            / \
-               C   z'         x'  B
+               B   z'         x'  C
                   / \        / \
-                 B   A      D   C
+                 C   D      A   B
      */
     private void zagzag( Entry x ){
         Entry y = x.right;
         Entry z = x.right.right;
+        // swap x and y
         E e = x.element;
         x.element = z.element;
         z.element = e;
-        y.right = z.left;
-        if ( y.right != null ){
-            y.right.parent = y;
-        }
+        // move A
         z.left = x.left;
         if( z.left != null){
             z.left.parent = z;
         }
+        // move B
         z.right = y.left;
         if( z.right != null){
             z.right.parent = z;
         }
+        // move C
+        y.right = z.left;
+        if ( y.right != null ){
+            y.right.parent = y;
+        }
+        // move D
         x.right = z.right;
         if( x.right != null ){
             x.right.parent = x;
         }
+        // move y
         x.left = y;
         y.parent = x;
-        z.parent = y;
+        // move x
         y.left = z;
+        z.parent = y;
     }
 }

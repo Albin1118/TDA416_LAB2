@@ -32,7 +32,7 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
     }
 
     /**
-     * Find the first occurence of an element
+     * Find the first occurrence of an element
      * in the list that is equal to the argument
      * <tt>e</tt> with respect to its natural order.
      * I.e. <tt>e.compareTo(element)</tt> is 0.
