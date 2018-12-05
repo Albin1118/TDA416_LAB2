@@ -13,11 +13,9 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
             return null;
         }
 
-        boolean entry = splayFind(e,root);
+        boolean found = splayFind(e,root);
 
-        if(entry){
-            //E element = entry.element;
-            //splay(entry);
+        if(found){
             return root.element;
         }else{
             return null;
