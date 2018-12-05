@@ -265,13 +265,13 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     }
 
     /* Rotera 1 steg höger, 1 steg vänster, dvs
-               x'                  z'
-              / \                /   \
-             D   y'   -->       x'    B
+               x'                 z'
+              / \                / \
+             D   y'   -->       y'  A
                 / \            / \
-               A   z'         D   y'
-                  / \            / \
-                 C   B          A   C
+               C   z'         x'  B
+                  / \        / \
+                 B   A      D   C
      */
     private void zagzag( Entry x ){
         Entry y = x.right;
@@ -287,13 +287,16 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         if( z.left != null){
             z.left.parent = z;
         }
+        z.right = y.left;
+        if( z.right != null){
+            z.right.parent = z;
+        }
         x.right = z.right;
         if( x.right != null ){
             x.right.parent = x;
         }
-        x.left = z;
-        z.parent = x;
-        z.right = y;
-        y.parent = z;
+        x.left = y;
+        y.parent = x;
+        z.parent = y;
     }
 }
