@@ -298,5 +298,6 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
         x.left = y;
         y.parent = x;
         z.parent = y;
+        y.left = z;
     }
 }
