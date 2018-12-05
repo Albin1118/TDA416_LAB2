@@ -9,10 +9,6 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     @Override
     public E get(E e) {
 
-        if( root == null){
-            return null;
-        }
-
         boolean found = splayFind(e,root);
 
         if(found){
