@@ -98,6 +98,8 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
             return;
         }
 
+        splay(e.parent.parent);
+
         Entry parent = e.parent;
         Entry grandparent = parent.parent;
         if (parent == grandparent.left) {
@@ -113,7 +115,6 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
                 zagzag(grandparent);
             }
         }
-        splay(grandparent);
     }
 
     // ========== ========== ========== ==========
