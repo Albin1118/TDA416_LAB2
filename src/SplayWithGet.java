@@ -6,6 +6,20 @@
  */
 public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 
+    /**
+     *  Find the first occurence of an element
+     *  in the collection that is equal to the argument
+     *  <tt>e</tt> with respect to its natural order.
+     *  I.e. <tt>e.compateTo(element)</tt> is 0.
+     *
+     *  After an element is found it gets splayed to the top for faster future searches.
+     *  If no matching element is found, the closest one gets splayed to the top instead.
+     *
+     *  @param e The dummy element to compare to.
+     *  @return  An element  <tt>e'</tt> in the collection
+     *           satisfying <tt>e.compareTo(e') == 0</tt>.
+     *           If no element is found, <tt>null</tt> is returned
+     */
     @Override
     public E get(E e) {
 
@@ -19,6 +33,11 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
 
     }
 
+    /**
+     * @param elem The dummy element to compare to.
+     * @param t The Entry to search through.
+     * @return
+     */
     private boolean splayFind( E elem, Entry t ) {
         if ( t == null )
             return false;
