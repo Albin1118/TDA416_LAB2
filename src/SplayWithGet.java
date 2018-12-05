@@ -98,8 +98,6 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
             return;
         }
 
-        splay(e.parent.parent);
-
         Entry parent = e.parent;
         Entry grandparent = parent.parent;
         if (parent == grandparent.left) {
@@ -115,6 +113,8 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
                 zagzag(grandparent);
             }
         }
+
+        splay(grandparent);
     }
 
     // ========== ========== ========== ==========
@@ -219,37 +219,48 @@ public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchT
     } //  doubleRotateLeft
     // ========== ========== ========== ==========
 
-    /* Rotera 1 steg vänster, 1 steg höger, dvs
+    /*
               x'                  z'
-             / \                /   \
-            y'  D   -->        B     x'
+             / \                 /  \
+            y'  D   -->         A    y'
            / \                      / \
-          z'  A                    y'  D
-         / \                      / \
-        B   C                    C   A
+          z'  C                    B   x'
+         / \                          / \
+        A   B                        C   D
     */
     private void zigzig( Entry x ){
         Entry y = x.left;
         Entry z = x.left.left;
+        // swap x and z
         E e = x.element;
         x.element = z.element;
         z.element = e;
-        y.left = z.right;
-        if ( y.left != null ){
-            y.left.parent = y;
-        }
-        z.right = x.right;
-        if( z.right != null){
-            z.right.parent = z;
-        }
+        // move A
         x.left = z.left;
         if( x.left != null ){
             x.left.parent = x;
         }
-        x.right = z;
-        z.parent = x;
-        z.left = y;
-        y.parent = z;
+        // move B
+        y.left = z.right;
+        if ( y.left != null ){
+            y.left.parent = y;
+        }
+        // move C
+        z.left = y.right;
+        if( z.left != null){
+            z.left.parent = z;
+        }
+        // move D
+        z.right = x.right;
+        if( z.right != null){
+            z.right.parent = z;
+        }
+        // move y
+        x.right = y;
+        y.parent = x;
+        // move x
+        y.right = z;
+        z.parent = y;
 
     }
 
