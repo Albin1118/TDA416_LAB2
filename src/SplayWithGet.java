@@ -3,6 +3,9 @@
  * moving elements to the top when searching for them with <tt>get</tt> for faster future searches for when getting
  * elements that are searched for often.
  * @param <E> The comparable type of the tree's elements.
+ * @author Albin Söderberg
+ * @author Anders Magnusson
+ * @author Group 59
  */
 public class SplayWithGet<E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 

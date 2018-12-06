@@ -3,6 +3,9 @@
  * This is a regular <tt>LinkedCollection</tt>, but adding elements into their natural order when using
  * <tt>add</tt>, and extended with the method <tt>get</tt>, see below.
  * @param <E> The comparable type of the list's elements.
+ * @author Albin Söderberg
+ * @author Anders Magnusson
+ * @author Group 59
  */
 public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollection<E> implements CollectionWithGet<E> {
 
