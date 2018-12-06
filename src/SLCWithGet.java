@@ -14,14 +14,14 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
     @Override
     public boolean add( E e ){
 
-        if(e == null || isEmpty() || (e.compareTo(head.element) < 0) ){
+        if(e == null || isEmpty() || (e.compareTo(head.element) <= 0) ){
             return super.add(e);
         }
 
         Entry p = head;
 
         while(p.next != null){
-            if (e.compareTo(p.next.element) < 0){
+            if (e.compareTo(p.next.element) <= 0){
                 p.next = new Entry(e, p.next);
                 return true;
             }
